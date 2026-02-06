@@ -1,175 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HELLO BEBU</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-red: #ff0000;
-            --dark-red: #4b0000;
-            --glass: rgba(255, 255, 255, 0.08);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html {
-            height: 100%; width: 100%;
-            background: radial-gradient(circle at center, #200000 0%, #000 100%);
-            color: #fff; font-family: 'Montserrat', sans-serif;
-            overflow: hidden; perspective: 1000px;
-        }
-        /* ---   --- */
-        #opening-screen {
-            position: fixed; inset: 0; background: #000;
-            z-index: 2000; display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-        }
-        .welcome-title {
-            font-family: 'Dancing Script', cursive; font-size: 3.5rem;
-            color: var(--primary-red); opacity: 0;
-            filter: drop-shadow(0 0 15px var(--primary-red));
-        }
-        /* --- Main Layout --- */
-        .container {
-            position: relative; width: 100%; height: 100%;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .section {
-            position: absolute; width: 90%; max-width: 500px;
-            padding: 40px; border-radius: 30px;
-            background: var(--glass); backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,0,0,0.1);
-            display: none; flex-direction: column; align-items: center;
-            z-index: 10;
-        }
-        .section.active { display: flex; }
-        h2 { font-family: 'Dancing Script', cursive; font-size: 3.2rem; margin-bottom: 20px; color: #ff4d4d; }
-        p { font-size: 1rem; line-height: 1.6; color: #ddd; margin-bottom: 30px; letter-spacing: 0.5px; }
-        /* --- Buttons --- */
-        .magic-btn {
-            background: linear-gradient(45deg, var(--primary-red), #b30000);
-            border: none; padding: 15px 40px; color: #fff;
-            border-radius: 50px; font-weight: bold; cursor: pointer;
-            text-transform: uppercase; letter-spacing: 2px;
-            box-shadow: 0 10px 20px rgba(255,0,0,0.3);
-            transition: 0.3s; position: relative; overflow: hidden;
-        }
-        .magic-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--primary-red); }
-        /* --- Rose Graphics --- */
-        .rose-visual {
-            font-size: 80px; margin-bottom: 20px;
-            filter: drop-shadow(0 0 20px red);
-            animation: float 3s ease-in-out infinite;
-        }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-        /* --- Bottom Credit (Fixed) --- */
-        .creator-credit {
-            position: fixed; bottom: 20px; width: 100%; text-align: center;
-            font-family: 'Dancing Script', cursive; font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.4); z-index: 100;
-        }
-        /* --- Petals & Glow --- */
-        .petal {
-            position: fixed; background: #ff0000; border-radius: 150% 0 150% 150%;
-            pointer-events: none; z-index: 5;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HELLO BEBU</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary-red: #ff0000;
+    --glass: rgba(255, 255, 255, 0.08);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body, html {
+    height: 100%; width: 100%;
+    background: radial-gradient(circle at center, #200000 0%, #000 100%);
+    color: #fff; font-family: 'Montserrat', sans-serif;
+    overflow: hidden; perspective: 1000px;
+}
+/* Opening Screen */
+#opening-screen {
+    position: fixed; inset: 0; background: #000;
+    z-index: 2000; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+}
+.welcome-title {
+    font-family: 'Dancing Script', cursive; font-size: 3.5rem;
+    color: var(--primary-red); opacity: 0;
+    filter: drop-shadow(0 0 15px var(--primary-red));
+}
+/* Main Layout */
+.container {
+    position: relative; width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+}
+.section {
+    position: absolute; width: 90%; max-width: 500px;
+    padding: 40px; border-radius: 30px;
+    background: var(--glass); backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,0,0,0.1);
+    display: none; flex-direction: column; align-items: center;
+    z-index: 10;
+}
+.section.active { display: flex; }
+h2 { font-family: 'Dancing Script', cursive; font-size: 3.2rem; margin-bottom: 20px; color: #ff4d4d; }
+p { font-size: 1rem; line-height: 1.6; color: #ddd; margin-bottom: 30px; letter-spacing: 0.5px; }
+/* Buttons */
+.magic-btn {
+    background: linear-gradient(45deg, var(--primary-red), #b30000);
+    border: none; padding: 15px 40px; color: #fff;
+    border-radius: 50px; font-weight: bold; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 2px;
+    box-shadow: 0 10px 20px rgba(255,0,0,0.3);
+    transition: 0.3s; position: relative; overflow: hidden;
+}
+.magic-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--primary-red); }
+/* Rose Visual */
+.rose-visual {
+    font-size: 80px; margin-bottom: 20px;
+    filter: drop-shadow(0 0 20px red);
+    animation: float 3s ease-in-out infinite;
+}
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+/* Bottom Credit */
+.creator-credit {
+    position: fixed; bottom: 20px; width: 100%; text-align: center;
+    font-family: 'Dancing Script', cursive; font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.4); z-index: 100;
+}
+/* Petals & Hearts */
+.petal, .floating-heart {
+    position: fixed; pointer-events: none; z-index: 5;
+}
+.petal { background: #ff0000; border-radius: 150% 0 150% 150%; }
+.floating-heart { font-size: 20px; }
+</style>
 </head>
 <body onclick="initAudio()">
-    <audio id="bg-music" loop>
-        <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
-    </audio>
 
-    <div id="opening-screen">
-        <div class="welcome-title">Welcome Susma karki(Ney naa) ...</div>
-        <div style="width: 150px; height: 2px; background: #333; margin-top: 20px; position: relative; overflow: hidden;">
-            <div id="loader-bar" style="position: absolute; left: -100%; width: 100%; height: 100%; background: red;"></div>
-        </div>
+<audio id="bg-music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<div id="opening-screen">
+    <div class="welcome-title">Welcome to Susma karki (Ney naa) ❤️</div>
+    <div style="width: 150px; height: 2px; background: #333; margin-top: 20px; position: relative; overflow: hidden;">
+        <div id="loader-bar" style="position: absolute; left: -100%; width: 100%; height: 100%; background: red;"></div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="step1" class="section active">
+        <h2>Happy Rose Day!</h2>
+        <div class="rose-visual">🌹</div>
+        <p>On this special moment, I’ve prepared a surprise journey just for you. Let's go inside...</p>
+        <button class="magic-btn" onclick="nextStep(1)">Start the Journey</button>
     </div>
 
-    <div class="container">
-        <div id="step1" class="section active">
-            <h2>Happy Rose Day!</h2>
-            <div class="rose-visual">🌹</div>
-            <p>On this special moment, I’ve prepared a surprise journey just for you. Let's go inside...</p>
-            <button class="magic-btn" onclick="nextStep(1)">Start the Journey</button>
-        </div>
-
-        <div id="step2" class="section">
-            <h2>Pure Love</h2>
-            <p>Just like how a rose spreads its fragrance, your presence brings peace to my life.</p>
-            <button class="magic-btn" onclick="nextStep(2)">Next...</button>
-        </div>
-
-        <div id="step3" class="section">
-            <h2>Unique Beauty</h2>
-            <p>Among thousands of flowers, a red rose stands out. Just like you stand at the center of my world.</p>
-            <button class="magic-btn" onclick="nextStep(3)">One More Thing</button>
-        </div>
-
-        <div id="step4" class="section">
-            <h2>Always Be Mine ❤️</h2>
-            <p>May our bond remain as fresh and colorful as the petals of a rose. Happy Rose Day Bebu❤️</p>
-            <button class="magic-btn" onclick="location.reload()">See Again</button>
-        </div>
+    <div id="step2" class="section">
+        <h2>Pure Love</h2>
+        <p>Just like how a rose spreads its fragrance, your presence brings peace to my life.</p>
+        <button class="magic-btn" onclick="nextStep(2)">Next...</button>
     </div>
 
-    <div class="creator-credit">
-        Yours, Aayush Maka
+    <div id="step3" class="section">
+        <h2>Unique Beauty</h2>
+        <p>Among thousands of flowers, a red rose stands out. Just like you stand at the center of my world.</p>
+        <button class="magic-btn" onclick="nextStep(3)">One More Thing</button>
     </div>
 
-    <script>
-        // --- God Level Intro Logic ---
-        window.addEventListener('load', () => {
-            const tl = gsap.timeline();
-            tl.to(".welcome-title", {opacity: 1, duration: 1.5, y: -20, ease: "power2.out"})
-              .to("#loader-bar", {left: "0%", duration: 2, ease: "power1.inOut"}, "-=0.5")
-              .to("#opening-screen", {opacity: 0, duration: 1, delay: 0.5, onComplete: () => {
-                  document.getElementById('opening-screen').style.display = 'none';
-              }});
-        });
+    <div id="step4" class="section">
+        <h2>Always Be Mine ❤️</h2>
+        <p>May our bond remain as fresh and colorful as the petals of a rose. Happy Rose Day Sanu ❤️</p>
+        <button class="magic-btn" onclick="location.reload()">See Again</button>
+    </div>
+</div>
 
-        // --- Step Transition Logic ---
-        function nextStep(current) {
-            const outStep = document.getElementById('step' + current);
-            const inStep = document.getElementById('step' + (current + 1));
+<div class="creator-credit">
+    Yours, Aayush Maka
+</div>
 
-            gsap.to(outStep, {
-                duration: 0.8,
-                opacity: 0,
-                rotationY: -90,
-                z: -500,
-                ease: "power3.inOut",
-                onComplete: () => {
-                    outStep.classList.remove('active');
-                    inStep.classList.add('active');
-                    gsap.fromTo(inStep,
-                        {opacity: 0, rotationY: 90, z: -500},
-                        {duration: 1, opacity: 1, rotationY: 0, z: 0, ease: "power3.out"}
-                    );
-                }
-            });
+<script>
+// Opening screen
+window.addEventListener('load', () => {
+    const tl = gsap.timeline();
+    tl.to(".welcome-title", {opacity: 1, duration: 1.5, y: -20, ease: "power2.out"})
+      .to("#loader-bar", {left: "0%", duration: 2, ease: "power1.inOut"}, "-=0.5")
+      .to("#opening-screen", {opacity: 0, duration: 1, delay: 0.5, onComplete: () => {
+          document.getElementById('opening-screen').style.display = 'none';
+      }});
+});
+
+// Step transitions
+function nextStep(current) {
+    const outStep = document.getElementById('step' + current);
+    const inStep = document.getElementById('step' + (current + 1));
+    gsap.to(outStep, {
+        duration: 0.8,
+        opacity: 0,
+        rotationY: -90,
+        z: -500,
+        ease: "power3.inOut",
+        onComplete: () => {
+            outStep.classList.remove('active');
+            inStep.classList.add('active');
+            gsap.fromTo(inStep,
+                {opacity: 0, rotationY: 90, z: -500},
+                {duration: 1, opacity: 1, rotationY: 0, z: 0, ease: "power3.out"}
+            );
         }
+    });
+}
 
-        // --- Audio Context ---
-        function initAudio() {
-            const audio = document.getElementById('bg-music');
-            if(audio.paused) {
-                audio.play();
-                audio.volume = 0.5;
-            }
-        }
+// Audio
+function initAudio() {
+    const audio = document.getElementById('bg-music');
+    if(audio.paused) { audio.play(); audio.volume = 0.5; }
+}
 
-        // --- Realistic Petal Rain ---
-        function createPetal() {
-            const p = document.createElement('div');
-            p.className = 'petal';
-            p.style.left = Math.random() * 100 + 'vw';
-            p.style.top = '-20px';
-            p.style.width = Math.random() * 15 + 10 + 'px';
-            p.style.height = p.style.width;
-            p.style.opacity = Math.random() * 0.8 + 0.2;
-            document.body.appendChild(p);
+// Petal rain
+function createPetal() {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.top = '-20px';
+    const size = Math.random() * 15 + 10;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.opacity = Math.random() * 0.8 + 0.2;
+    document.body.appendChild(p);
 
+    gsap.to(p, {
+        y: window.innerHeight + 50,
+        x: '+=' + (Math.random() * 50 - 25),
+        rotation: Math.random() * 360,
+        duration: 6 + Math.random() * 3,
+        ease: 'power1.in',
+        onComplete: () => p.remove()
+    });
+}
+setInterval(createPetal, 400);
+
+// Floating hearts
+function createHeart() {
+    const h = document.createElement('div');
+    h.className = 'floating-heart';
+    h.textContent = '❤️';
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.bottom = '0px';
+    document.body.appendChild(h);
+    gsap.to(h, {y: '-120vh', scale: 1.2, opacity: 0, duration: 6, ease: 'power1.out', onComplete: () => h.remove()});
+}
+setInterval(createHeart, 800);
+
+// Rose bloom pulse
+const rose = document.querySelector('.rose-visual');
+function pulseRose() {
+    gsap.to(rose, {scale: 1.1, duration: 0.8, yoyo: true, repeat: -1, ease: 'power1.inOut'});
+}
+pulseRose();
+</script>
+
+</body>
+</html>
