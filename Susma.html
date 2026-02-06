@@ -1,0 +1,152 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Rose Day 🌹</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at top, #ffd1dc, #ff9a9e);
+      font-family: 'Segoe UI', cursive;
+      overflow: hidden;
+      text-align: center;
+    }h1 {
+  color: #8b0000;
+  font-size: 3.2rem;
+  margin-bottom: 5px;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+h2 {
+  color: #7a0026;
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  font-weight: normal;
+}
+
+p {
+  color: #5a001a;
+  font-size: 1.4rem;
+  margin-bottom: 25px;
+}
+
+.rose {
+  width: 300px;
+  height: 300px;
+  cursor: pointer;
+}
+
+.petal {
+  fill: #d1003f;
+  transform-origin: center bottom;
+  transform: scale(0);
+  opacity: 0;
+}
+
+.center {
+  fill: #8b0000;
+  transform: scale(0);
+  opacity: 0;
+}
+
+.bloom .petal {
+  animation: bloom 2.5s ease-in-out forwards;
+}
+
+.bloom .petal:nth-child(1) { animation-delay: 0s; }
+.bloom .petal:nth-child(2) { animation-delay: 0.2s; }
+.bloom .petal:nth-child(3) { animation-delay: 0.4s; }
+.bloom .petal:nth-child(4) { animation-delay: 0.6s; }
+
+.bloom .center {
+  animation: centerPop 1.5s ease-in-out forwards;
+  animation-delay: 0.8s;
+}
+
+@keyframes bloom {
+  from {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1.3) rotate(360deg);
+    opacity: 1;
+  }
+}
+
+@keyframes centerPop {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1.2); opacity: 1; }
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px #ff4d6d; }
+  to { text-shadow: 0 0 20px #ff1e4d; }
+}
+
+  </style>
+</head>
+<body>
+  <h1>Happy Rose Day 🌹</h1>
+  <h2>Susma Karki</h2>
+  <p>Love you, Sanu ❤️</p>  <svg class="rose" id="rose" viewBox="0 0 200 200">
+    <ellipse class="petal" cx="100" cy="120" rx="30" ry="60" />
+    <ellipse class="petal" cx="100" cy="120" rx="30" ry="60" transform="rotate(45 100 120)" />
+    <ellipse class="petal" cx="100" cy="120" rx="30" ry="60" transform="rotate(-45 100 120)" />
+    <ellipse class="petal" cx="100" cy="120" rx="30" ry="60" transform="rotate(90 100 120)" />
+    <circle class="center" cx="100" cy="120" r="18" />
+  </svg>  <audio id="bgm" preload="auto" loop>
+    <!-- Place the song file in this repo and name it exactly as below -->
+    <source src="laakhau-hajara.mp3" type="audio/mpeg">
+  </audio>  <script>
+    const rose = document.getElementById('rose');
+    const bgm = document.getElementById('bgm');
+
+    rose.addEventListener('click', () => {
+      rose.classList.remove('bloom');
+      void rose.offsetWidth; // reset animation
+      rose.classList.add('bloom');
+      bgm.play(); // ensure music plays on user interaction
+    });
+
+    // Auto bloom once on load
+    window.onload = () => {
+      rose.classList.add('bloom');
+    };
+  
+
+    // subtle heartbeat synced animation
+    setInterval(() => {
+      document.body.classList.toggle('beat');
+    }, 1200);
+  </script>  <style>
+    body.beat { filter: brightness(1.02); }
+    .floating-heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 6s linear forwards;
+      opacity: 0.8;
+    }
+    @keyframes floatUp {
+      from { transform: translateY(0) scale(0.8); opacity: 0.8; }
+      to { transform: translateY(-120vh) scale(1.2); opacity: 0; }
+    }
+  </style>  <script>
+    // floating hearts
+    setInterval(() => {
+      const h = document.createElement('div');
+      h.className = 'floating-heart';
+      h.textContent = '❤️';
+      h.style.left = Math.random() * 100 + 'vw';
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 6000);
+    }, 900);
+
+</body>
+</html>
