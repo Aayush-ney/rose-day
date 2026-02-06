@@ -43,15 +43,19 @@ p {
 
 .petal {
   fill: #d1003f;
-  transform-origin: center bottom;
-  transform: scale(1);
+  transform-origin: 100px 120px;
   opacity: 1;
   filter: drop-shadow(0 0 15px #ff1e4d);
 }
 
+.petal:nth-child(1) { transform: rotate(0deg) translateY(0); }
+.petal:nth-child(2) { transform: rotate(45deg) translateY(0); }
+.petal:nth-child(3) { transform: rotate(-45deg) translateY(0); }
+.petal:nth-child(4) { transform: rotate(90deg) translateY(0); }
+
 .center {
   fill: #8b0000;
-  transform: scale(1);
+  r: 18;
   opacity: 1;
   filter: drop-shadow(0 0 20px #ff1e4d);
 }
@@ -79,7 +83,7 @@ body.beat { filter: brightness(1.02); }
 </head>
 <body>
   <h1>Happy Rose Day 🌹</h1>
-  <h2>Susma(Ney naa) </h2>
+  <h2>Susma (Ney naa) </h2>
   <p>Love you, Sanu ❤️</p>  <svg class="rose" id="rose" viewBox="0 0 200 200">
     <ellipse class="petal" cx="100" cy="120" rx="30" ry="60" />
     <ellipse class="petal" cx="100" cy="120" rx="30" ry="60" transform="rotate(45 100 120)" />
@@ -92,20 +96,20 @@ body.beat { filter: brightness(1.02); }
     const rose = document.getElementById('rose');
     const bgm = document.getElementById('bgm');
 
-    // Make rose always bloomed and glowing
-    rose.classList.add('bloom'); // bloom on page load
+    // Rose always bloomed and visible
+    rose.classList.add('bloom');
 
-    // Optional: play music on tap for mobile
+    // Play music on tap (for mobile browsers)
     rose.addEventListener('click', () => {
       bgm.play();
     });
 
-    // subtle heartbeat synced animation
+    // Subtle heartbeat effect
     setInterval(() => {
       document.body.classList.toggle('beat');
     }, 1200);
 
-    // floating hearts
+    // Floating hearts continuously
     setInterval(() => {
       const h = document.createElement('div');
       h.className = 'floating-heart';
